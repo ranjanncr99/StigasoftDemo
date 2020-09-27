@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteItem } from '../../Actions/ItemsActions';
 //import all the components we are going to use
-import { FlatList, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { FlatList, View, Text, StyleSheet, Dimensions, Alert } from 'react-native';
 
 const { heigh, width } = Dimensions.get('window');
     
@@ -38,9 +38,29 @@ const { heigh, width } = Dimensions.get('window');
   const getItem = (item) => {
     //Function for click on an item
     //alert('Id : ' + item.id + ' Name : ' + item.name);
-    deleteItem(item.id);
+    Alert.alert(
+      'Delete Item',
+      `Are you want to delete item ${item.name} ?`,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return null;
+          },
+        },
+        {
+          text: 'Confirm',
+          onPress: () => {
+            deleteItem(item.id);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+   
   };
 
+  //sort item list by id.
   const compareId = (a, b) => {
     let comparison = 0;
     if (a.id > b.id) {

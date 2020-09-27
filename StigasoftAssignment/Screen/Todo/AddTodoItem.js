@@ -18,13 +18,16 @@ const AddTodoItem = ({addItem}) => {
 
     addItem(itemName.trim());
     setItemName('');
-    }
+    Keyboard.dismiss;
+
+  }
   return (
     <View style={styles.addItemContainer}>
       <TextInput style={styles.input} 
       placeholder="Add an item!" 
       onChangeText={ItemName => setItemName(ItemName)}
       value={itemName}
+      onSubmitEditing={onAddItem}
       />
       <View style={styles.buttonContainer}>
        <Button onPress={onAddItem} title="Add"/>
