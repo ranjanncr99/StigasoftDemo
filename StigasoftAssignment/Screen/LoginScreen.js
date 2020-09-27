@@ -166,11 +166,6 @@ const LoginScreen = props => {
                 <Text style={styles.buttonTextStyle}>Reset</Text>
               </TouchableOpacity>
             </View>
-            <Text
-              style={styles.registerTextStyle}
-              onPress={() => props.navigation.navigate('RegisterScreen')}>
-              New Here ? Register
-            </Text>
           </KeyboardAvoidingView>
         </View>
       </ScrollView>

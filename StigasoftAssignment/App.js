@@ -11,7 +11,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 //Import all the screens needed
 import SplashScreen from './Screen/SplashScreen';
 import LoginScreen from './Screen/LoginScreen';
-import RegisterScreen from './Screen/RegisterScreen';
 import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 
 //Import all the redux dependencies
@@ -27,16 +26,6 @@ const Auth = createStackNavigator({
     screen: LoginScreen,
     navigationOptions: {
       headerShown: false,
-    },
-  },
-  RegisterScreen: {
-    screen: RegisterScreen,
-    navigationOptions: {
-      title: 'Register',
-      headerStyle: {
-        backgroundColor: '#307ecc',
-      },
-      headerTintColor: '#fff',
     },
   },
 });
