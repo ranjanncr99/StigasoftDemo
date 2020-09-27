@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from './Components/loader';
+import Constants from './Constants'; 
 
 const LoginScreen = props => {
   let [userEmail, setUserEmail] = useState('');
@@ -39,11 +40,15 @@ const LoginScreen = props => {
   }
   const handleSubmitPress = () => {
     setErrortext('');
-    if (!userEmail || userEmail.length < 5) {
+    if (!userEmail) {
       alert('Please fill Email');
       return;
     }
-    if (!userPassword || userPassword.length < 5 ) {
+    if (userEmail.length < 5 || userPassword.length < Constants.MAX_LENGTH ) {
+      alert('Email or Password should not less than 5 character.');
+      return;
+    }
+    if (!userPassword) {
       alert('Please fill Password');
       return;
     }
@@ -57,7 +62,7 @@ const LoginScreen = props => {
     }
     formBody = formBody.join('&');
 
-    fetch('https://aboutreact.herokuapp.com/login.php', {
+    fetch(Constants.BASE_URL, {
       method: 'POST',
       body: formBody,
       headers: {
@@ -95,12 +100,7 @@ const LoginScreen = props => {
             <View style={{ alignItems: 'center' }}>
               <Image
                 source={require('../Image/company_logo.jpg')}
-                style={{
-                  width: '50%',
-                  height: 100,
-                  resizeMode: 'contain',
-                  margin: 30,
-                }}
+                style={styles.logoIconStyle}
               />
             </View>
             <View style={styles.SectionStyle}>
@@ -188,19 +188,28 @@ const styles = StyleSheet.create({
     marginRight: 35,
     margin: 10,
   },
+  logoIconStyle:{
+    
+      width: '50%',
+      height: 100,
+      resizeMode: 'contain',
+      margin: 30,
+    },
   buttonContainer: {
     flexDirection: 'row',
     marginLeft: 35,
     marginRight: 35,
-    justifyContent: 'space-around'
+    justifyContent: 'space-evenly'
   },
   ButtuonIconStyle: {
+    
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'grey',
+    backgroundColor: 'white',
     borderWidth: .5,
     borderColor: '#fff',
     height: 40,
+    width: 80,
     borderRadius: 5 ,
     margin: 5,
  
@@ -227,7 +236,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonTextStyle: {
-    color: '#FFFFFF',
+    color: 'blue',
     paddingVertical: 10,
     fontSize: 16,
   },
